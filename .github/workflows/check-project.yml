@@ -1,0 +1,57 @@
+# GitHub Actions 화면에 표시될 workflow 이름입니다.
+name: AI Workflow Check
+
+# main 브랜치에 push가 발생할 때마다 workflow가 실행됩니다.
+on:
+  push:
+    branches:
+      - main
+
+# 실제로 실행할 작업들을 jobs 아래에 작성합니다.
+jobs:
+  check-project:
+    # GitHub에서 제공하는 Ubuntu 최신 환경에서 실행합니다.
+    runs-on: ubuntu-latest
+
+    steps:
+      # 저장소의 코드를 GitHub Actions 실행 환경으로 가져옵니다.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 요청한 안내 문구를 실행 로그에 출력합니다.
+      - name: Print workflow messages
+        run: |
+          echo "코드 수정이 일어났습니다."
+          echo "AI Workflow 자동화가 실행되었습니다."
+          echo "자동 검사 완료"
+
+      # 현재 프로젝트에 어떤 파일들이 있는지 확인합니다.
+      - name: List project files
+        run: ls -la
+
+      # 필수 파일이 없으면 에러 메시지를 출력하고 workflow를 실패시킵니다.
+      - name: Check required files
+        run: |
+          missing=0
+
+          if [ ! -f "index.html" ]; then
+            echo "::error file=index.html::index.html 파일이 없습니다."
+            missing=1
+          fi
+
+          if [ ! -f "script.js" ]; then
+            echo "::error file=script.js::script.js 파일이 없습니다."
+            missing=1
+          fi
+
+          if [ ! -f "style.css" ]; then
+            echo "::error file=style.css::style.css 파일이 없습니다."
+            missing=1
+          fi
+
+          if [ ! -f "README.md" ]; then
+            echo "::error file=README.md::README.md 파일이 없습니다."
+            missing=1
+          fi
+
+          exit $missing
