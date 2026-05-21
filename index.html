@@ -1,221 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- 문자 인코딩 설정 -->
-    <meta charset="UTF-8">
-    <!-- 반응형 디자인을 위한 뷰포트 설정 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 페이지 제목 -->
-    <title>AI 협업 개발 실습</title>
-    <!-- 외부 CSS 파일 연결 -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Agent Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 전체 페이지 컨테이너 -->
-    <div class="container">
-
-        <!-- ===== 헤더 섹션 ===== -->
-        <header class="header">
-            <!-- 페이지 제목 -->
-            <h1 class="title">🎓 AI 협업 개발 실습</h1>
-            <!-- 페이지 설명 -->
-            <p class="description">첫 번째 웹 앱입니다.</p>
-        </header>
-
-        <!-- 구분선 -->
-        <hr class="divider">
-
-        <!-- ===== 메인 콘텐츠 섹션 ===== -->
-        <main class="main-content">
-
-            <!-- 사용자 입력 영역 -->
-            <section class="input-section">
-                <!-- 안내 메시지 (파란색 정보 박스) -->
-                <div class="alert alert-info">
-                    <span class="alert-icon">ℹ️</span>
-                    <span>아래에 이름을 입력하고 버튼을 눌러 실습을 시작해보세요.</span>
-                </div>
-
-                <!-- 입력창 컨테이너 -->
-                <div class="input-container">
-                    <!-- 이름 입력 라벨 -->
-                    <label for="nameInput" class="input-label">이름 입력</label>
-                    <!-- 이름 입력창 -->
-                    <input
-                        type="text"
-                        id="nameInput"
-                        class="input-field"
-                        placeholder="예: 김철수"
-                        autocomplete="off"
-                    >
-                </div>
-
-                <!-- 버튼 영역 -->
-                <div class="button-container">
-                    <!-- 실습 시작 버튼 -->
-                    <button id="startButton" class="btn btn-primary">실습 시작</button>
-                </div>
-
-                <!-- 메시지 출력 영역 (처음에는 숨김) -->
-                <div id="messageBox" class="message-box hidden"></div>
-            </section>
-
-            <!-- 구분선 -->
-            <hr class="divider">
-
-            <!-- ===== AI 협업 워크플로우 섹션 ===== -->
-            <section class="workflow-section">
-                <h2 class="section-title">📋 AI 협업 워크플로우</h2>
-
-                <!-- 워크플로우 카드들을 격자 레이아웃으로 배치 -->
-                <div class="cards-grid">
-                    <!-- Step 1: 요구사항 작성 -->
-                    <div class="card">
-                        <div class="card-number">1</div>
-                        <h3 class="card-title">요구사항 작성</h3>
-                        <p class="card-description">개발자가 해결해야 할 문제와 원하는 결과를 명확하게 정의합니다.</p>
-                    </div>
-
-                    <!-- Step 2: Codex가 초안 코드 생성 -->
-                    <div class="card">
-                        <div class="card-number">2</div>
-                        <h3 class="card-title">Codex 초안 생성</h3>
-                        <p class="card-description">Codex AI가 요구사항을 바탕으로 초안 코드를 자동으로 생성합니다.</p>
-                    </div>
-
-                    <!-- Step 3: 사람 검토 -->
-                    <div class="card">
-                        <div class="card-number">3</div>
-                        <h3 class="card-title">사람 검토</h3>
-                        <p class="card-description">개발자가 생성된 코드를 검토하고 문제점을 찾아냅니다.</p>
-                    </div>
-
-                    <!-- Step 4: Claude Code 분석 -->
-                    <div class="card">
-                        <div class="card-number">4</div>
-                        <h3 class="card-title">Claude Code 분석</h3>
-                        <p class="card-description">Claude Code가 코드를 분석하여 개선사항을 제안합니다.</p>
-                    </div>
-
-                    <!-- Step 5: 리팩토링 -->
-                    <div class="card">
-                        <div class="card-number">5</div>
-                        <h3 class="card-title">리팩토링</h3>
-                        <p class="card-description">피드백을 반영하여 코드를 더 깔끔하고 효율적으로 개선합니다.</p>
-                    </div>
-
-                    <!-- Step 6: 테스트 및 검증 -->
-                    <div class="card">
-                        <div class="card-number">6</div>
-                        <h3 class="card-title">테스트 및 검증</h3>
-                        <p class="card-description">작성된 코드가 제대로 작동하는지 꼼꼼하게 테스트합니다.</p>
-                    </div>
-
-                    <!-- Step 7: Git 저장 -->
-                    <div class="card">
-                        <div class="card-number">7</div>
-                        <h3 class="card-title">Git 저장</h3>
-                        <p class="card-description">완성된 코드를 Git 저장소에 저장하여 버전 관리를 합니다.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 구분선 -->
-            <hr class="divider">
-
-            <!-- ===== 협업 구조도 섹션 ===== -->
-            <section class="diagram-section">
-                <h2 class="section-title">🔄 협업 구조도</h2>
-
-                <!-- 협업 흐름을 시각적으로 표현 -->
-                <div class="collaboration-diagram">
-                    <!-- Codex 상자 -->
-                    <div class="diagram-box codex">
-                        <span class="box-emoji">🤖</span>
-                        <span class="box-text">Codex</span>
-                    </div>
-
-                    <!-- 화살표 (→) -->
-                    <div class="diagram-arrow">→</div>
-
-                    <!-- 개발자 상자 -->
-                    <div class="diagram-box developer">
-                        <span class="box-emoji">👨‍💻</span>
-                        <span class="box-text">개발자</span>
-                    </div>
-
-                    <!-- 화살표 (→) -->
-                    <div class="diagram-arrow">→</div>
-
-                    <!-- Claude Code 상자 -->
-                    <div class="diagram-box claude">
-                        <span class="box-emoji">🧠</span>
-                        <span class="box-text">Claude Code</span>
-                    </div>
-
-                    <!-- 화살표 (→) -->
-                    <div class="diagram-arrow">→</div>
-
-                    <!-- 개발자 상자 (다시) -->
-                    <div class="diagram-box developer">
-                        <span class="box-emoji">👨‍💻</span>
-                        <span class="box-text">개발자</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 구분선 -->
-            <hr class="divider">
-
-            <!-- ===== 사용 방법 섹션 ===== -->
-            <section class="guide-section">
-                <h2 class="section-title">📖 실행 방법</h2>
-
-                <!-- 단계별 설명 -->
-                <div class="guide-content">
-                    <h3>1단계: 파일 준비</h3>
-                    <p>다음 3개의 파일이 같은 폴더에 있는지 확인하세요:</p>
-                    <ul class="file-list">
-                        <li><code>index.html</code> - 웹페이지 구조</li>
-                        <li><code>style.css</code> - 디자인 스타일</li>
-                        <li><code>script.js</code> - 기능 구현</li>
-                    </ul>
-
-                    <h3>2단계: 웹브라우저에서 열기</h3>
-                    <p>
-                        <code>index.html</code> 파일을 웹브라우저(Chrome, Edge, Safari 등)에서 열어주세요.
-                        <br>
-                        <strong>방법:</strong>
-                        <ul>
-                            <li>파일 탐색기에서 index.html을 더블클릭</li>
-                            <li>또는 브라우저 주소창에 파일 경로를 붙여넣기</li>
-                        </ul>
-                    </p>
-
-                    <h3>3단계: 앱 사용</h3>
-                    <ul class="usage-steps">
-                        <li>이름을 입력창에 입력하세요</li>
-                        <li>「실습 시작」 버튼을 클릭하세요</li>
-                        <li>환영 메시지가 나타나면 성공입니다!</li>
-                    </ul>
-
-                    <h3>💡 팁</h3>
-                    <p>
-                        이 파일들은 인터넷 연결이 없어도 로컬에서 실행 가능합니다.
-                        <br>
-                        원하면 파일을 수정해서 자신만의 실습 페이지로 만들 수 있습니다.
-                    </p>
-                </div>
-            </section>
-        </main>
-
-        <!-- ===== 푸터 섹션 ===== -->
-        <footer class="footer">
-            <p>© 2024 AI 협업 개발 실습 | 초보자 수업용 웹 앱</p>
-        </footer>
-    </div>
-
-    <!-- 외부 JavaScript 파일 연결 -->
-    <script src="script.js"></script>
+  <header class="header">
+    <span class="header-title">⬡ Multi-Agent Orchestration Dashboard</span>
+    <span class="header-hint">에이전트 카드를 클릭하면 해당 에이전트의 작업과 로그를 필터링합니다</span>
+  </header>
+  <div class="dashboard">
+    <section data-panel="agent-cards" class="panel"></section>
+    <section data-panel="task-status" class="panel"></section>
+    <section data-panel="logs" class="panel"></section>
+    <section data-panel="model-strategy" class="panel"></section>
+  </div>
+  <script src="mockData.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
